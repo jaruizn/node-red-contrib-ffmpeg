@@ -23,6 +23,7 @@ module.exports = RED => {
 
   const HOST = '0.0.0.0'
   const PORT = RED.settings.uiPort
+  const IN_URL = 'rtsp://192.168.1.30:554/live/ch00_0'
   const STREAM = generateUUID()
 
   let serverUpgradeAdded = false
@@ -174,38 +175,14 @@ module.exports = RED => {
       node.ffmpeg.kill()
     }
 
-    switch (node.deviceType) {
-      case 'tello':
-        node.ffmpeg = spawn('ffmpeg', [
+    node.ffmpeg = spawn('ffmpeg', [
           '-hide_banner',
-          '-i',
-          `udp://${TELLO_HOST}:${TELLO_VIDEO_PORT}`,
-          '-f',
-          'mpegts',
-          '-codec:v',
-          'mpeg1video',
-          '-s',
-          '640x480',
-          '-b:v',
-          '800k',
-          '-bf',
-          '0',
-          '-r',
-          '20',
-          `http://${HOST}:${PORT}${basePath}${STREAM}`
-        ])
-        break
-      case 'raspi':
-        node.ffmpeg = spawn('ffmpeg', [
-          '-hide_banner',
-          '-f',
-          'v4l2',
           '-framerate',
           '25',
           '-video_size',
           '640x640',
           '-i',
-          '/dev/video0',
+          `${IN_URL}`,
           '-f',
           'mpegts',
           '-codec:v',
@@ -221,9 +198,7 @@ module.exports = RED => {
           '4', // 1 to 31
           `http://${HOST}:${PORT}${basePath}${STREAM}`
         ])
-        break
-    }
-
+    
     node.ffmpeg.stderr.on('data', data => {
       console.log(`${data}`)
     })
