@@ -18,9 +18,6 @@ module.exports = RED => {
   const ws = require('ws')
   const url = require('url')
 
-  const TELLO_VIDEO_PORT = 11111
-  const TELLO_HOST = '192.168.10.1'
-
   const HOST = '0.0.0.0'
   const PORT = RED.settings.uiPort
   const IN_URL = 'rtsp://192.168.1.30:554/live/ch00_0'
@@ -177,10 +174,6 @@ module.exports = RED => {
 
     node.ffmpeg = spawn('ffmpeg', [
           '-hide_banner',
-          '-framerate',
-          '25',
-          '-video_size',
-          '640x640',
           '-i',
           `${IN_URL}`,
           '-f',
