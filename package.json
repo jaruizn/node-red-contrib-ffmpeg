@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-custom-ffmpeg-video",
-  "version": "0.1",
+  "version": "0.1.0",
   "description": "A simple ffmpeg wrapper for streaming video in Node-RED",
   "license": "MIT",
   "scripts": {
