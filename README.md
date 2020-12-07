@@ -14,7 +14,7 @@ $ npm install node-red-contrib-custom-ffmpeg-video
 > **Note:** This node requires that you have [ffmpeg](https://ffmpeg.org/) installed on your machine.
 
 ## Configure your node
-Open the node's configuration panel to set `Device Type` and the `Stream URL`.
+Open the node's configuration panel to set `Input URL` and the `Stream URL`.
 ![](images/configure.png)
 > **Note:** In this example our stream will be accessible at `ws://<host>:<port>/stream`
 
