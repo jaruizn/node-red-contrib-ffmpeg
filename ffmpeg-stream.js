@@ -174,6 +174,7 @@ module.exports = RED => {
 
     node.ffmpeg = spawn('ffmpeg', [
           '-hide_banner',
+          '-nostats',
           '-i',
           `${IN_URL}`,
           '-f',
